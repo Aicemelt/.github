@@ -359,8 +359,6 @@ flowchart TD
 
 > 궁금한 점은 언제든 GitHub Issue를 통해 문의 바랍니다.
 
-[Tropical-docs Repository](https://github.com/Aicemelt/Tropical-docs)
-
 **문의:** GitHub Issues 또는 Pull Request
 
 **프로젝트 관리:** [Team Aicemelt](https://github.com/Aicemelt)
