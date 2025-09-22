@@ -50,8 +50,8 @@
 
 ## Getting Started
 
-- [백엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/Backend_project_Guide.md)
-- [프론트엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/Frontend_project_Guide.md)
+- [백엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/setup/Backend_project_Guide.md)
+- [프론트엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/setup/Frontend_project_Guide.md)
 - [API 스펙 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/03_Specifications/TropiCal%20-%20API%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
 - [시스템 아키텍처](https://github.com/Aicemelt/Tropical-docs/blob/main/02_Architecture/TropiCal%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 
