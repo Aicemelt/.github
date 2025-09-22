@@ -1,339 +1,367 @@
-# Team Aicemelt
+# TropiCal : AI 기반 스몰토크 추천 플랫폼
 
-협업간에 자주 꺼내보는 규칙문서입니다.
-개발 완료 후 프로젝트 통합 README 로 바뀔 문서입니다.
+<p align="center">
+  <img src="img/0910_logo_2.webp" alt="TropiCal 로고" width="300" />
+</p>
 
-# Git 워크플로우 규칙
+<p align="center"><b>TropiCal - 일상을 대화로 연결하는 AI 캘린더</b></p>
+<p align="center">사용자의 일정, 일기, 할 일, 버킷리스트를 분석하여 맞춤형 스몰토크 주제를 추천하는 대화 불안 해소 플랫폼</p>
 
-
-본 문서는 **Team Aicemelt**의 *WarmUpdate 프로젝트*에서 **Git 브랜치 전략, 커밋/PR 규칙, 이슈 관리 규칙을 정리하여 팀 전체가 공유할 수 있도록 작성되었습니다.**
-
-**원본 작성자:** [왕택준](https://github.com/TJK98)
-
-**문서 버전:** v0.1
-
-**최종 수정일:** 2025.09.09
-
-**대상 독자:**
-
-* **개발자(프론트엔드/백엔드)**: 브랜치 전략, 커밋/PR 규칙을 실무에 적용
-* **팀 리더/리뷰어**: 코드 리뷰 및 협업 관리 기준으로 활용
-* **신규 합류자**: Git 협업 규칙을 빠르게 이해하기 위한 온보딩 자료
+<p align="center">
+  <b>TEAM</b> Aicemelt
+</p>
 
 ---
 
-## 1. 브랜치 전략 및 구조
+## 목차
 
-### 브랜치 종류
-
-| 브랜치    | 용도                       |
-| ------ | ------------------------ |
-| `main` | 최종 결과물 (배포 전용, 직접 작업 금지) |
-| `dev`  | 통합 개발 브랜치 (모든 기능 브랜치 병합) |
-
----
-
-### 브랜치 네이밍 컨벤션
-
-- `feature/기능명` → 새 기능 개발
-- `fix/버그명` → 버그 수정
-- `refactor/모듈명` → 리팩토링
-- `docs/문서명` → 문서 추가/수정
-- `hotfix/급한수정` → 배포 직전 긴급 수정 (예: main에서 분기)
-
-**예시**
-
-- `feature/user-profile` : 사용자 프로필 기능 개발
-- `fix/login-password-error` : 로그인 시 비밀번호 오류 수정
-- `refactor/user-service` : UserService 구조 개선
-- `docs/contributing-guide` : 기여 가이드 문서 작성
-- `hotfix/critical-login-failure` : 긴급 로그인 불가 문제 해결
-
-> GitHub의 **기본 브랜치**는 `dev`로 설정합니다. 모든 기능 개발은 `feature/*` 브랜치에서 시작하고, 완료 시 `dev`로 PR을 생성합니다.
+- [프로젝트 정보](#프로젝트-정보)
+- [Getting Started](#getting-started)
+- [프로젝트 비전](#프로젝트-비전)
+    - [TropiCal이 해결하는 문제](#tropical이-해결하는-문제)
+    - [TropiCal의 철학](#tropical의-철학)
+    - [플랫폼 차별성](#플랫폼-차별성)
+- [주요 기능](#주요-기능)
+- [사용자 페르소나](#사용자-페르소나)
+- [팀 구성](#팀-구성)
+- [개발 기간](#개발-기간)
+- [기술 스택](#기술-스택)
+- [시스템 아키텍처](#시스템-아키텍처)
+- [대표 문서](#대표-문서)
+    - [전체 문서 폴더](#전체-문서-폴더)
+    - [협업 규칙 & 기여 문서](#협업-규칙--기여-문서)
+    - [라이선스](#라이선스)
+- [향후 업데이트 계획](#향후-업데이트-계획)
+- [라이선스 및 문의](#라이선스-및-문의)
 
 ---
 
-### 브랜치 전략 (Merge 정책)
+## 프로젝트 정보
 
-| From → To           | 전략                           | 비고                            |
-| ------------------- | ---------------------------- | ----------------------------- |
-| `feature/*` → `dev` | **Squash & Merge**           | 리뷰/CI 필수, 커밋 메시지는 PR 제목/본문 사용 |
-| `dev` → `main`      | **Merge Commit (`--no-ff`)** | 릴리스 성격 유지, 체인지로그/릴리스 노트 동반    |
-| `hotfix/*` → `dev`  | **Squash & Merge**           | 빠른 수습 후 `dev` 안정화             |
-| `hotfix/*` → `main` | **Merge Commit (`--no-ff`)** | 배포 추적성 확보                     |
-
-> **원칙**:
->
-> - 기능 개발 히스토리는 dev에서 깔끔하게 관리 (**Squash & Merge**)
-> - 릴리스/배포 이력은 main에서 추적 가능하도록 (**Merge Commit --no-ff**) 유지
+| 항목           | 내용                                                                       |
+| ------------ | ------------------------------------------------------------------------ |
+| **팀명**       | **Aicemelt** — *AI와 사람의 자연스러운 소통을 연결하는 팀* |
+| **프로젝트명**    | **WarmUpdate** — *팀 Aicemelt가 추진하는 대화 불안 해소 프로젝트*         |
+| **플랫폼명**     | **TropiCal** — *Tropical + Calendar. 차갑고 어색한 분위기를 따뜻하게 녹여내는 AI 기반 대화 캘린더*    |
+| **버전**       | v1.1                                                                   |
+| **Base URL** | `http://localhost:9005/` (Backend), `http://localhost:5005` (Frontend)                                                |
 
 ---
 
-### 브랜치 보호 규칙
+## Getting Started
 
-| 브랜치    | 보호 설정              | 설명                            |
-| ------ | ------------------ | ----------------------------- |
-| `main` | main-protection 적용 | 직접 커밋/삭제 금지, 오직 PR 병합만 허용     |
-| `dev`  | dev-protection 적용  | PR 리뷰 승인 후에만 병합 가능 (직접 푸시 금지) |
-
----
-
-## 2. 기능 개발 브랜치 전체 작업 흐름
-
-개발자는 항상 최신 `dev` 브랜치에서 새 기능 브랜치를 분기하여 작업하고, 완료 후 PR을 통해 `dev`로 병합합니다.
-
-1. **작업 시작 전**: `git switch dev && git pull origin dev`
-2. **기능 브랜치 생성**: `git switch -c feature/기능명`
-3. **기능 개발 및 커밋**: `git commit -m "feat: 내용 (#이슈번호)"`
-4. **PR 생성 전**: 필요 시 `dev` 최신화(`merge` 권장, `rebase`는 고급 옵션)
-5. **PR 생성**: `feature/* → dev`로 생성
-6. **병합 후 브랜치 삭제**: 로컬 및 원격 정리
+- [백엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/Backend_project_Guide.md)
+- [프론트엔드 설치 및 실행 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/Frontend_project_Guide.md)
+- [API 스펙 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/03_Specifications/TropiCal%20-%20API%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
+- [시스템 아키텍처](https://github.com/Aicemelt/Tropical-docs/blob/main/02_Architecture/TropiCal%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 
 ---
 
-## 3. 커밋 메시지 규칙
+## 프로젝트 비전
 
-### 커밋 메시지 형식
+TropiCal은 단순한 캘린더 앱이 아니라, **대화 불안을 해결하고 자연스러운 소통을 돕는 AI 기반 플랫폼**입니다.
 
-```
-<타입>: <변경 요약> (#이슈번호)
+### TropiCal이 해결하는 문제
 
-<변경 상세 설명>
-```
+- **대화 시작의 어려움**: 무슨 말을 먼저 꺼내야 할지 몰라 침묵이 흐를 때의 불안과 스트레스
+- **개인적 소재 부족**: 회사 이야기 외에는 어떤 주제로 대화를 이끌어가야 할지 막막함
+- **상황별 대화 주제**: 일상 속 다양한 상황에서 자연스럽고 개인적인 대화를 시작할 수 있는 소재 필요
 
-| 타입         | 설명                    |
-|------------|-----------------------|
-| `feat`     | 새로운 기능 추가             |
-| `fix`      | 버그 수정                 |
-| `refactor` | 리팩토링 (기능 변화 없음)       |
-| `style`    | 코드 포맷팅, 세미콜론 누락 등     |
-| `docs`     | 문서 수정 및 추가            |
-| `chore`    | 빌드 설정, 패키지 관리 등 기타 변경 |
-| `test`     | 테스트 코드 추가 및 수정        |
+### TropiCal의 철학
 
----
+* **Schedule → Conversation 철학**:
 
-### 작성 규칙
+  단순 일정 관리를 넘어, 일정 맥락을 기반으로 한 대화 주제 추천에 초점을 둡니다. 사용자의 일상이 자연스러운 대화 소재로 변환됩니다.
 
-1. **첫 줄**: 변경의 핵심을 간결하게 요약 (`<타입>: <변경 요약> (#이슈번호)`)
-2. **두 번째 줄은 비움**
-3. **세 번째 줄 이후**: 변경 상세 설명
+* **Context-Aware 철학**:
 
-    - 무엇을 변경했고, 왜 변경했는지 간단히 작성
-    - 필요 시 변경된 파일/모듈, 동작 방식, 주의사항 등 추가
-    - 여러 변경 사항은 불릿(`-`)으로 구분
+  '언제/어디서/누구와/무엇을'과 같은 맥락을 파악하여 주제 카드와 예시 문장을 맞춤형으로 제공합니다.
 
----
+* **Safe & Harmless 철학**:
 
-GitHub·GitLab·`git log --oneline`에서는 **첫 줄만** 대표 메시지로 보입니다.
+  민감하거나 갈등을 유발할 수 있는 주제를 감지하고 안전한 대체 문장을 제안합니다.
 
-상세 설명은 PR, `git show`에서 확인 가능해서 협업 시 추적이 편합니다.
+* **Personalized Coaching 철학**:
 
----
+  사용자의 톤, 길이, 관심사를 반영한 맞춤형 대화 코칭을 제공합니다.
 
-### 예시
+* **동의 기반 개인화 철학**:
 
-```bash
-feat: 여행 등록 및 관리 기능 추가 (#45)
+  사용자가 동의한 범위 내에서만 개인 데이터를 활용하여 AI 추천의 개인화 수준을 조정합니다.
 
-- 여행 목록 조회 및 검색 기능 구현 (TripSearchRequestDto, TripStatusInfo, TripListItemDto 추가)
-- 여행 등록/수정 페이지(trip-form.html, trip-form.js) 추가
-- 여행 목록 페이지(trip-list.js) 상태/필터 기능 확장
-- SecurityConfig에 /trips/**, /dashboard 접근 허용
-```
+### 플랫폼 차별성
+
+TropiCal의 목표는 "일정과 대화를 연결하는 안전한 대화 캘린더"입니다.
+
+| 구분         | 기존 캘린더 앱      | **TropiCal**                        |
+| ---------- | --------------- | -------------------------------- |
+| **핵심 경험**  | 일정 관리 중심 | **일정 → 대화 주제** 연결         |
+| **AI 역할** | 일정 알림 수준     | **맥락 이해 + 개인화 추천 + 대화 코칭**      |
+| **데이터 활용**  | 일정 정보만 활용    | **일정 + 일기 + TODO + 버킷리스트** 통합 분석 |
+| **개인정보 보호** | 일괄 수집       | **동의 기반 선택적** 개인화 |
+| **사용자 경험** | 정보 관리 도구       | **대화 불안 해소**를 위한 코칭 플랫폼    |
+
+
+> TropiCal은 캘린더를 넘어, **누구나 자연스럽고 안전하게 말문을 여는 세상**을 만드는 데 집중합니다.
 
 ---
 
-## 4. PR(Pull Request) 작성 규칙
+## 주요 기능
 
-### 제목 형식
+### 캘린더 및 일정 관리
+- **월별/날짜별 캘린더 뷰**: 직관적인 일정 관리 인터페이스
+- **일정 CRUD**: 생성, 조회, 수정, 삭제
+- **공휴일 연동**: 한국천문연구원 API 기반 공휴일 정보 표시
+- **일정 속성**: 날짜, 시간, 제목, 장소, 참여자, 메모, 완료 여부
 
-`[타입] PR 상세 내용 (#이슈 번호)` (예: `[feat] 로그인 기능 구현 (#12)`)
+### 개인 기록 관리
+- **일기 관리**: 감정과 날씨 정보를 포함한 일기 작성
+- **할 일 관리**: 마감 기한과 우선순위 기반 TODO 리스트
+- **버킷리스트**: 장기적인 목표와 꿈 관리
 
-- feat: 새로운 기능 추가
-- fix: 버그 수정
-- refactor: 리팩토링 (기능 변경 없이 구조 개선)
-- docs: 문서 수정
-- test: 테스트 코드 추가/수정
-- style: 코드 포맷팅, 세미콜론 누락 등
-- chore: 빌드 업무 수정, 패키지 매니저 설정 등
+### AI 스몰토크 주제 추천 (핵심 기능)
+- **개인화 추천**: 사용자의 일정, 일기, 할 일, 버킷리스트 데이터 분석
+- **5가지 주제 유형**: 일상적, 관심사, 생각거리, 창의적, 복합 주제
+- **예시 질문 제공**: 각 주제별 대화 시작 문장 제안
+- **중복 방지**: 코사인 유사도 기반 중복 주제 필터링
+- **동의 기반**: 사용자 동의 범위에 따른 개인화 수준 조정
 
-### 예시
-
-```bash
-[feat] 여행 등록 및 관리 기능 추가 (#45)
-```
-
-### 본문
-
-PR 생성 시 `.github/PULL_REQUEST_TEMPLATE.md`에 정의된 템플릿이 자동으로 적용됩니다. 각 항목에 맞게 내용을 기재해주세요.
-
-※ **불필요한 항목은 삭제 가능합니다.**
-
-> ❗ PR 작성자는 반드시 본인의 로컬에서 기능 테스트를 완료한 후 올려야 합니다.
+### 개인 설정 및 보안
+- **회원가입**: 로컬 계정 및 소셜 로그인 (카카오, 구글, 네이버)
+- **온보딩**: 필수/선택 약관 동의 시스템
+- **개인화 설정**: 캘린더 시작 요일, 시간대, 알림 설정
+- **개인정보 보호**: 마스킹 처리 및 동의 기반 데이터 활용
 
 ---
 
-## 5. 코드 리뷰 및 테스트 규칙
+## 사용자 페르소나
 
-- **최소 리뷰 인원**: 팀원 **1인 이상에게 Approve**를 받아야 병합 가능
-- **자기 PR 직접 병합 금지**: 본인이 올린 PR은 **Merge 금지**
-- **기능 실행 테스트 필수**: 리뷰어는 해당 브랜치를 직접 로컬에서 실행하여 검증합니다.
+### 주요 타겟
 
-### 코드 리뷰 절차
+| 페르소나 | 연령/직업 | 주요 니즈 | 사용 시나리오 |
+|---------|-----------|----------|---------------|
+| **사회초년생 이지은** | 25세, 신입사원 | 동료들과의 자연스러운 스몰토크 | 팀 미팅 전후 대화 주제 확보 |
+| **취업준비생 김민준** | 27세, 구직자 | 스터디 모임에서의 대화 시작 | 면접 준비와 스터디 활동 기반 대화 |
+| **직장인 박서연** | 31세, 회사원 | 동호회에서의 취미 대화 | 버킷리스트와 여가 활동 기반 대화 |
+| **학생 백승현** | 33세, 대학생 | 서비스 체험 및 가치 판단 | 개인정보 입력 없이 기본 기능 경험 |
 
-1. **브랜치 방향 확인**
-   예: `feature/story-upload` → `dev`
+---
 
-2. **변경 코드 확인**
-   GitHub의 `Files changed` 탭에서 전체 변경 사항 확인
+## 팀 구성
 
-3. **로컬 테스트**
+| 역할 | 이름                                     | 주요 담당 기능                                                                                   | 회고록 링크                                                                                                             |
+| -- | -------------------------------------- |-------------------------------------------------------------------------------------------------| ------------------------------------------------------------------------------------------------------------------ |
+| 팀장 | [백승현](https://github.com/Sirosho)        |  |  |
+| 팀원 | [진도희](https://github.com/TJK98)          |  |  |
+| 팀원 | [신동준](https://github.com/sdj3959)        |  |  |
+| 팀원 | [왕택준](https://github.com/sdj3959)        |  |  |
 
-   ```bash
-   git fetch origin
-   git checkout feature/브랜치명  # 리뷰할 브랜치로 이동
-   # 실행 후 실제 기능 확인 (예: AI 생성 테스트, 스토리 업로드 등)
-   ```
+---
 
-4. **피드백 작성 및 승인**
-    - `LGTM!`, `수고하셨습니다` 등 코멘트 + Approve
-    - 문제가 있거나 수정이 필요한 경우 `Changes requested` 선택 + 구체적 피드백
+## 개발 기간
 
-### 충돌(Conflict) 처리 규칙
+**2025.09.08 ~ 2025.09.23**
 
-- **충돌 발생 시 PR 작성자가 직접 해결**
-  - 리뷰어 승인 전까지 로컬 환경에서 해결 후 `git push`로 갱신
-- **해결 절차**
-    1. 최신 `dev` 브랜치를 로컬로 가져오기
+| **Phase**                          | **기간**         | **주요 내용**                               |
+| ---------------------------------- | -------------- | --------------------------------------- |
+| **Phase 1. Planning**              | 09.08 \~ 09.11 | 기획, 초기 설계, DB 모델링, 요구사항 명세                       |
+| **Phase 2. Development**           | 09.12 \~ 09.15 | 핵심 기능 개발, AI API 연동, 백엔드 구축                        |
+| **Phase 3. Frontend Build**        | 09.16 \~ 09.21 | 프론트엔드 구현 (React, API 연결, UI/UX 개선) |
+| **Phase 4. Integration & Testing** | 09.21 \~ 09.22 | 통합 테스트, 버그 수정, 성능 최적화                   |
+| **Phase 5. Documentation**         | 09.21 \~ 09.23 | 문서 정리 및 발표 자료 작성                             |
 
-       ```bash
-        # 1. 원격 저장소의 최신 정보를 가져옵니다.
-        git fetch origin
+---
 
-        # 2. 내 작업 브랜치로 이동합니다.
-        git checkout feature/브랜치명
+## 기술 스택
 
-        # 3. 최신 dev 브랜치의 내용을 내 브랜치로 병합합니다. (이때 충돌이 발생할 수 있음)
-        git merge origin/dev
-       ```
+| 구분 | 기술 |
+|------|------|
+| **언어** | ![Java](https://img.shields.io/badge/Java-17-007396?logo=openjdk&logoColor=white) ![JavaScript](https://img.shields.io/badge/JavaScript-ES6+-F7DF1E?logo=javascript&logoColor=black) |
+| **프레임워크** | ![Spring Boot](https://img.shields.io/badge/Spring%20Boot-3.5.5-6DB33F?logo=springboot&logoColor=white) ![React](https://img.shields.io/badge/React-19.1.1-61DAFB?logo=react&logoColor=black) |
+| **프론트엔드** | ![Sass](https://img.shields.io/badge/Sass-1.92.1-CC6699?logo=sass&logoColor=white) ![Vite](https://img.shields.io/badge/Vite-7.1.2-646CFF?logo=vite&logoColor=white) ![Framer Motion](https://img.shields.io/badge/Framer%20Motion-12.23.16-0055FF?logo=framer&logoColor=white) ![FullCalendar](https://img.shields.io/badge/FullCalendar-6.1.19-FF6D00?logo=calendar&logoColor=white) |
+| **상태 관리** | ![Zustand](https://img.shields.io/badge/Zustand-5.0.8-000000?logo=zustand&logoColor=white) |
+| **라우팅** | ![React Router](https://img.shields.io/badge/React%20Router-7.8.2-CA4245?logo=reactrouter&logoColor=white) |
+| **HTTP 클라이언트** | ![Axios](https://img.shields.io/badge/Axios-1.11.0-5A29E4?logo=axios&logoColor=white) |
+| **보안/인증** | ![Spring Security](https://img.shields.io/badge/Spring%20Security-6DB33F?logo=springsecurity&logoColor=white) ![JWT](https://img.shields.io/badge/JWT-0.12.3-000000?logo=jsonwebtokens&logoColor=white) ![OAuth2](https://img.shields.io/badge/OAuth2-4285F4?logo=oauth&logoColor=white) |
+| **AI 연동** | ![Spring AI](https://img.shields.io/badge/Spring%20AI-1.0.0--M5-6DB33F?logo=spring&logoColor=white) ![OpenAI](https://img.shields.io/badge/OpenAI-412991?logo=openai&logoColor=white) |
+| **데이터베이스** | ![MariaDB](https://img.shields.io/badge/MariaDB-003545?logo=mariadb&logoColor=white) ![JPA](https://img.shields.io/badge/JPA-59666C?logo=hibernate&logoColor=white) ![QueryDSL](https://img.shields.io/badge/QueryDSL-5.0.0-1C8D73) |
+| **메일링** | ![Spring Mail](https://img.shields.io/badge/Spring%20Mail-6DB33F?logo=spring&logoColor=white) |
+| **환경 변수** | ![Dotenv](https://img.shields.io/badge/Dotenv-4.0.0-ECD53F?logo=dotenv&logoColor=black) |
+| **외부 API** | ![한국천문연구원](https://img.shields.io/badge/한국천문연구원-공휴일API-blue) ![소셜로그인](https://img.shields.io/badge/소셜로그인-카카오/구글/네이버-green) |
+| **빌드/의존성 관리** | ![Gradle](https://img.shields.io/badge/Gradle-02303A?logo=gradle&logoColor=white) ![npm](https://img.shields.io/badge/npm-CB3837?logo=npm&logoColor=white) |
+| **테스트** | ![JUnit5](https://img.shields.io/badge/JUnit5-25A162?logo=junit5&logoColor=white) ![Spring Security Test](https://img.shields.io/badge/Spring%20Security%20Test-6DB33F?logo=spring&logoColor=white) |
+| **테스트 환경** | ![Postman](https://img.shields.io/badge/Postman-FF6C37?logo=postman&logoColor=white) ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black) |
+| **API 문서** | ![Swagger](https://img.shields.io/badge/Swagger-85EA2D?logo=swagger&logoColor=black) |
+| **협업 도구** | ![Git](https://img.shields.io/badge/Git-F05032?logo=git&logoColor=white) ![GitHub](https://img.shields.io/badge/GitHub-181717?logo=github&logoColor=white) ![Discord](https://img.shields.io/badge/Discord-5865F2?logo=discord&logoColor=white) |
+| **개발 환경** | ![IntelliJ IDEA](https://img.shields.io/badge/IntelliJ%20IDEA-000000?logo=intellijidea&logoColor=white) ![VS Code](https://img.shields.io/badge/VS%20Code-007ACC?logo=visualstudiocode&logoColor=white) ![Windows11](https://img.shields.io/badge/Windows%2011-0078D6?logo=windows11&logoColor=white) ![macOS](https://img.shields.io/badge/macOS-000000?logo=apple&logoColor=white) |
+---
 
-    2. 충돌 파일을 열어 수정 후 저장
-    3. 수정 완료 후 커밋 & 푸시
+## 시스템 아키텍처
 
-       ```bash
-       git add .
-       git commit -m "Resolve merge conflict: 파일명"
-       git push origin feature/브랜치명
-       ```
+### 전체 아키텍처 개요
 
-- **주의 사항**
-  - 충돌 시 무조건 자신의 코드만 살리지 말고, 상대방 변경 사항을 반영할 수 있는지 검토
-  - 충돌 해결 후 반드시 **기능 재테스트** 진행
+```mermaid
+flowchart TD
+    subgraph User["사용자"]
+        A["웹 브라우저 (React)"]
+    end
 
-### Merge Commit 메시지 규칙
+    subgraph Backend["Backend Layer (Spring Boot)"]
+        B["API Gateway / Controller"]
+        C["Service Layer"]
+        D["Repository Layer"]
+        E[("Database (MariaDB)")]
+        F["AI Service Adapter"]
+    end
 
-PR 병합 시 생성되는 Merge commit 메시지는 다음 규칙을 따릅니다.
+    subgraph ExternalServices["외부 서비스"]
+        G["OpenAI Chat GPT API"]
+        H["카카오/구글/네이버 로그인 API"]
+        I["한국천문연구원 API"]
+    end
+    
+    subgraph DataStorage["데이터 저장소"]
+        J["사용자/일정/일기/TODO/버킷리스트"]
+        K["AI 추천 주제 데이터"]
+    end
 
-#### 1. 기본 형식
-
-```
-<타입>: <변경 요약> (#PR번호)
-
-- 주요 변경 사항 1
-- 주요 변경 사항 2
-- (선택) Closes / Fixes / Resolves #이슈번호  # 자동 종료용
-- (선택) Refs / Relates to #이슈번호          # 참조/부분 해결용
+    A -->|"REST API 호출"| B
+    B --> C
+    C --> D
+    D --> E
+    C --> F
+    F -->|"AI 주제 생성 요청"| G
+    C -->|"소셜 로그인"| H
+    C -->|"공휴일 정보 동기화"| I
+    E --> J
+    E --> K
 ```
 
-#### 2. 작성 방법
+### 주요 데이터 흐름
 
-이 규칙은 **PR을 병합(Merge)하는 리뷰어**가 **병합 시점**에 작성합니다.
-GitHub의 'Merge pull request' 버튼을 누를 때 나타나는 **텍스트 박스를 직접 수정**하여 아래 형식에 맞춥니다.
+1. **AI 스몰토크 주제 생성**
+   - 데이터 수집: 사용자의 최근 7일간 활동 데이터(일기, 일정, 투두리스트, 버킷리스트)
+   - 프롬프트 생성: 수집된 데이터를 바탕으로 AI 프롬프트 구성
+   - API 호출: OpenAI GPT API 호출하여 5개 주제 생성
+   - 중복 검사: 기존 주제와 코사인 유사도 계산 - [중복 검사 로직 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/technical/SmalltalkAI_DuplicatePrevention_Guide.md)
+   - 저장: 검증된 주제를 DB에 저장
 
-1. **제목 줄**
-    - PR 병합 시의 커밋 메시지는 **이슈 번호 제외 PR의 제목을 그대로 사용하는 것을 원칙**으로 합니다.
-    - PR 제목은 `[타입]: 상세 내용 (#이슈번호)` 형식을 따르므로, 최종 커밋 메시지 또한 자연스럽게 이 형식 이슈 번호 제외하여 따르게 됩니다.
-    - 예: `feat: 소설 이어쓰기 + AI 추천 기능 구현`
-
-2. **본문**
-    - PR 본문의 `작업 내용 요약`에서 핵심 변경 사항과 이슈 참조를 bullet 형식으로 옮깁니다.
-    - 예:
-
-      ```
-      - 새 소설 쓰기 페이지와 이어쓰기 페이지 UI/기능 구현
-      - AI 추천 기능 API 연동 완료
-      ```
-
-3. **이슈 참조**
-    - **`Closes #이슈번호`**: 이 PR이 해당 이슈를 **완전히 해결**했을 때 사용합니다. (자동 종료)
-    - **`Fixes #이슈번호`**: 버그 수정 맥락에서 주로 사용되며 Closes와 동일하게 동작합니다. (자동 종료, 버그 해결용)
-    - **`Resolves #이슈번호`**: "해결"을 강조할 때 사용하며, Closes와 동일하게 동작합니다. (자동 종료, 해결 강조)
-    - **`Refs #이슈번호`**: 이 PR이 이슈와 **관련은 있지만, 완전히 해결하지는 않을 때** 사용합니다. (관련 작업의 일부 해결, 자동 종료 없음)
-    - **`Relates to #이슈번호`**: 단순히 참조만 연결할 때 사용합니다. (단순 참조, 자동 종료 없음)
-
-    - 예시:
-
-      ```
-      Closes #30
-      Refs #31, #32
-      Resolves #77
-      Relates to #55
-      ```
-
-#### 3. 예시 메시지
-
-```
-feat: 사용자 알림 기능 추가
-
-- 알림 서비스 모듈 구현 (NotificationService, NotificationController)
-- 이메일/푸시 알림 연동
-- 사용자 설정 페이지에 알림 On/Off 옵션 추가
-Fixes #30
-Resolves #31
-Relates to #32
-```
-
-> 💡 참고: 규칙이 없을 경우 GitHub 기본 Merge commit 메시지(PR 제목 + 번호)를 사용해도 무방하나, 가능하면 위 형식으로 통일합니다.
-
-> 💡 **Tip: "Squash and Merge" 전략 사용 권장**
->
-> 우리 팀은 `dev` 브랜치의 히스토리를 깔끔하게 유지하기 위해 **"Squash and Merge"** 방식의 병합을 권장합니다.
-> PR을 병합할 때, GitHub의 "Merge pull request" 드롭다운 버튼을 눌러 "Squash and Merge"를 선택하세요.
->
-> 이렇게 하면 기능 브랜치의 모든 커밋이 하나의 커밋으로 합쳐지며, 이때 위에서 정의한 **Merge Commit 메시지 규칙에 따라** 커밋 메시지를 작성하면 됩니다.
+2. **동의 기반 개인화**
+   - 필수 동의: 일정 기반 추천 (서비스 이용 필수)
+   - 선택 동의: 일기/할일/버킷리스트 기반 추천
+   - 동의 범위에 따라 AI 개인화 수준 조정
 
 ---
 
-## 6. 이슈 관리 규칙
+## 대표 문서
 
-### 이슈 생성 원칙
+### 기획 및 요구사항
+- [프로젝트 개요](https://github.com/Aicemelt/Tropical-docs/blob/main/01_Planning/WarmUpDate%20-%20%ED%94%84%EB%A1%9C%EC%A0%9D%ED%8A%B8%20%EA%B0%9C%EC%9A%94.md)
+- [사용자 스토리 및 요구사항 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/01_Planning/TropiCal_%EC%82%AC%EC%9A%A9%EC%9E%90%EC%8A%A4%ED%86%A0%EB%A6%AC%20%EB%B0%8F%20%EC%9A%94%EA%B5%AC%EC%82%AC%ED%95%AD%EB%AA%85%EC%84%B8%EC%84%9C.md)
 
-- 모든 작업은 **이슈 먼저 생성** → **자신을 Assignee로 지정** 후 진행
-- 커밋과 PR에는 해당 이슈 번호를 반드시 태그합니다
+### 시스템 설계 및 명세
+- [시스템 아키텍처](https://github.com/Aicemelt/Tropical-docs/blob/main/02_Architecture/TropiCal%20%EC%8B%9C%EC%8A%A4%ED%85%9C%20%EC%95%84%ED%82%A4%ED%85%8D%EC%B2%98.md)
 
-### 본문
+- [개념 ERD 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/02_Architecture/TropiCal%20-%20%EA%B0%9C%EB%85%90%20ERD%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
+- [논리 ERD 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/02_Architecture/TropiCal%20-%20%EB%85%BC%EB%A6%AC%20ERD%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
 
-이슈 생성 시 `.github/ISSUE_TEMPLATE/`에 정의된 템플릿을 선택하여 작성할 수 있습니다. 목적에 맞는 템플릿을 사용하여 필요한 정보를 기재해주세요.
+- [API 명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/03_Specifications/TropiCal%20-%20API%20%EB%AA%85%EC%84%B8%EC%84%9C.md)
+- [사용자 흐름 기반 기능명세서](https://github.com/Aicemelt/Tropical-docs/blob/main/03_Specifications/TropiCal%20-%20%EC%82%AC%EC%9A%A9%EC%9E%90%ED%9D%90%EB%A6%84%20%EA%B8%B0%EB%B0%98%20%EA%B8%B0%EB%8A%A5%EB%AA%85%EC%84%B8%EC%84%9C.md)
 
-※ **불필요한 항목은 삭제 가능합니다.**
+### 개발 가이드
+- [백엔드 프로젝트 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/setup/Backend_project_Guide.md)
 
-> **참고**: `---`로 감싸인 상단 영역은 GitHub가 이슈의 제목, 라벨 등을 자동으로 설정하기 위해 사용하는 부분입니다.
+- [프론트엔드 프로젝트 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/setup/Frontend_project_Guide.md)
+
+- [JWT 키 생성 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/setup/generate_JWT_KEY_OpenSSL.md)
+
+- [AI 주제 추천 중복 방지 로직 가이드](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/technical/SmalltalkAI_DuplicatePrevention_Guide.md)
+
+### 정책 및 약관
+- [AI 추천 서비스 정책](https://github.com/Aicemelt/Tropical-docs/blob/main/05_Policies/TropiCal%20-%20AI%EC%B6%94%EC%B2%9C%EC%84%9C%EB%B9%84%EC%8A%A4%EC%A0%95%EC%B1%85.md)
+
+- [개인정보처리방침](https://github.com/Aicemelt/Tropical-docs/blob/main/05_Policies/TropiCal%20-%20%EA%B0%9C%EC%9D%B8%EC%A0%95%EB%B3%B4%EC%B2%98%EB%A6%AC%EB%B0%A9%EC%B9%A8.md)
+- [서비스 이용약관](https://github.com/Aicemelt/Tropical-docs/blob/main/05_Policies/TropiCal%20-%20%EC%84%9C%EB%B9%84%EC%8A%A4%20%EC%9D%B4%EC%9A%A9%EC%95%BD%EA%B4%80.md)
+
+### 전체 문서 폴더
+
+- [01_Planning](https://github.com/Aicemelt/Tropical-docs/tree/main/01_Planning) - 프로젝트 기획 문서
+- [02_Architecture](https://github.com/Aicemelt/Tropical-docs/tree/main/02_Architecture) - 시스템 아키텍처 및 설계 문서
+- [03_Specifications](https://github.com/Aicemelt/Tropical-docs/tree/main/03_Specifications) - 프로젝트 세부 스펙 문서
+- [04_Guides](https://github.com/Aicemelt/Tropical-docs/tree/main/04_Guides) - 프로젝트 내부 규칙 문서와 개발 가이드 문서
+- [05_Policies](https://github.com/Aicemelt/Tropical-docs/tree/main/05_Policies) - 프로젝트 정책 관련 문서
+- [06_meeting-notes](https://github.com/Aicemelt/Tropical-docs/tree/main/06_meeting-notes) - 프로젝트 회의록
+- [assets](https://github.com/Aicemelt/Tropical-docs/tree/main/assets) - 이미지, 다이어그램
+
+### 협업 규칙 & 기여 문서
+
+- [문서 버전 관리 규칙](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/collaboration/doc-versioning-rules.md)
+- [Git 워크플로우 규칙](https://github.com/Aicemelt/Tropical-docs/blob/main/04_Guides/collaboration/git-workflow.md)
+
 
 ---
 
-## 7. 이슈·커밋·PR·머지 커밋 규칙 요약
+## 향후 업데이트 계획
 
-| 작업 단위    | 규칙 형식                 | 예시                       |
-| -------- | --------------------- | ------------------------ |
-| 이슈 제목    | `[타입] 내용`             | `[docs] 기여 가이드 작성`       |
-| 커밋 메시지   | `타입: 내용 (#이슈번호)`      | `docs: 기여 가이드 작성 (#12)`  |
-| PR 제목    | `[타입] 내용 (#이슈번호)`     | `[docs] 기여 가이드 작성 (#12)` |
-| 머지 커밋 제목 | `PR 제목 그대로 (이슈번호 제외)` | `[docs] 기여 가이드 작성`       |
+### Phase 1 (v1.2.0) — 기능 개선
+
+* **AI 품질 고도화**
+    * 톤/길이 옵션 (격식/친근, 짧게/보통)
+    * 대화 스타일 학습 및 개인화 강화
+    * 더 정교한 맥락 이해 및 주제 생성
+
+* **사용자 경험 개선**
+    * 다크 모드 지원
+    * 반복 일정 관리
+    * 외부 캘린더 연동 (구글, 네이버)
+
+* **알림 시스템 강화**
+    * 실시간 WebSocket 기반 알림
+    * 스몰토크 주제 푸시 알림
+    * 일정 및 할 일 스마트 알림
+
+### Phase 2 (v1.3.0) — 기능 확장
+
+* **소셜 기능**
+    * 스몰토크 주제 공유
+    * 팀/커뮤니티 대화 주제 추천
+    * 공개 버킷리스트 및 동기부여 커뮤니티
+
+* **고급 분석**
+    * 대화 패턴 분석 및 리포트
+    * 개인 성장 트래킹
+    * 목표 달성률 시각화
+
+* **멀티 플랫폼**
+    * 모바일 앱 (iOS/Android)
+    * 웨어러블 연동
+    * 음성 입력/출력 기능
+
+### Phase 3 (v2.0.0) — 수익화 및 확장
+
+* **수익 모델**
+    * 프리미엄 구독제 (무제한 AI 추천, 고급 기능)
+    * 광고 기반 무료 서비스
+
+* **AI 고도화**
+    * 다국어 지원
+    * 문화적 맥락 이해
+    * 산업별/직군별 특화 대화 주제
+
+* **클라우드 네이티브**
+    * AWS 기반 마이크로서비스 아키텍처
+    * 자동 스케일링 및 로드 밸런싱
+    * 글로벌 CDN 배포
 
 ---
 
-## 8. 참고
+## 문의
 
-- 심화 Git 사용법은 [심화 Git 가이드](advanced-git-guide.md) 참고
-- 원격 환경 이동 및 작업 이어가기는 [원격 작업 가이드](./guides/remote-workflow.md) 참고
+
+> 궁금한 점은 언제든 GitHub Issue를 통해 문의 바랍니다.
+
+[Tropical-docs Repository](https://github.com/Aicemelt/Tropical-docs)
+
+**문의:** GitHub Issues 또는 Pull Request
+
+**프로젝트 관리:** [Team Aicemelt](https://github.com/Aicemelt)
